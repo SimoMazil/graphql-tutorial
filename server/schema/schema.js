@@ -9,12 +9,12 @@ const books = [
   {id: '3', name: 'Book Three', genre: 'Genre Three'}
 ]
 
-const { GraphQLObjectType, GraphQLString, GraphQLSchema } = graphql
+const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLSchema } = graphql
 
 const bookType = new GraphQLObjectType({
   name: 'Book',
   fields: () => ({
-    id: {type: GraphQLString},
+    id: {type: GraphQLID},
     name: {type: GraphQLString},
     genre: {type: GraphQLString}
   })
@@ -25,7 +25,7 @@ const rootQuery = new GraphQLObjectType({
   fields: {
     book: {
       type: bookType,
-      args: {id: {type: GraphQLString}},
+      args: {id: {type: GraphQLID}},
       resolve(parent, args) {
         // code to get data
         return _.find(books, {id: args.id})
