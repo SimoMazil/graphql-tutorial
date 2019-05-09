@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 
 const app = express()
 
-const url = 'mongodb://localhost:27017/test'
+const url = 'mongodb://localhost:27017/graphqlDB'
 mongoose.connect(url, { useNewUrlParser: true })
 mongoose.connection.once('open', () => {
   console.log("Connected to DB");
