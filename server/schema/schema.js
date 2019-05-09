@@ -15,7 +15,14 @@ const authors = [
   {id: '3', name: 'Author Three', age: 40}
 ]
 
-const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt, GraphQLSchema } = graphql
+const { 
+  GraphQLObjectType,
+  GraphQLID,
+  GraphQLString,
+  GraphQLInt,
+  GraphQLList,
+  GraphQLSchema
+} = graphql
 
 const bookType = new GraphQLObjectType({
   name: 'Book',
@@ -37,7 +44,13 @@ const authorType = new GraphQLObjectType({
   fields: () => ({
     id: {type: GraphQLID},
     name: {type: GraphQLString},
-    age: {type: GraphQLInt}
+    age: {type: GraphQLInt},
+    books: {
+      type: new GraphQLList(bookType),
+      resolve(parent, args) {
+        return _.filter(books, {authorId: parent.id})
+      }
+    }
   })
 })
 
